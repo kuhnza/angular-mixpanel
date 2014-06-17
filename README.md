@@ -35,3 +35,8 @@ Issues or feature requests
 --------------------------
 
 Create a ticket [here](https://github.com/kuhnza/angular-mixpanel/issues)
+
+Contributing
+------------
+
+Issue a pull request including any relavent testing and updated any documentation if required.
