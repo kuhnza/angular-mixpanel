@@ -6,6 +6,12 @@ Wraps the mixpanel JavaScript global to make it injectable and aid in testing.
 Usage
 -----
 
+First add the dependency to your app:
+
+```javascript
+angular.module('myApp', ['analytics.mixpanel']);
+```
+
 Minimally you'll need to configure your API key like so:
 
 ```javascript
@@ -29,7 +35,13 @@ You can also supply [super properties](https://mixpanel.com/help/reference/javas
         }]);
 ```
 
-Then you can inject `$mixpanel` wherever needed. The API is identical to the standard mixpanel JavaScript global.
+Then you can inject `$mixpanel` wherever needed. The API is identical to the standard mixpanel JavaScript global. For example:
+
+```javascript
+angular.module('myApp').controller('MyCtrl', function ($scope, $mixpanel) {
+    $mixpanel.track('my event');
+});
+```
 
 Issues or feature requests
 --------------------------
