@@ -3,6 +3,13 @@ angular-mixpanel
 
 Wraps the mixpanel JavaScript global to make it injectable and aid in testing.
 
+Installation
+------------
+
+Install via bower: `bower install angular-mixpanel`
+
+Or if you're old skool, copy `src/angular-mixpanel.js` into your project.
+
 Usage
 -----
 
