@@ -4,6 +4,7 @@
   "main": "./src/angular-mixpanel.js",
   "dependencies": {
     "angular": "1.2.x",
-    "angular-mocks": "~1.2.18"
+    "angular-mocks": "~1.2.18",
+    "mixpanel": "~2.2.0"
   }
 }
