@@ -1,6 +1,6 @@
 {
   "name": "angular-mixpanel",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "http://github.com/kuhnza/angular-mixpanel.git"
