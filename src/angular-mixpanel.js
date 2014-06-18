@@ -20,15 +20,36 @@
  */
 angular.module('analytics.mixpanel', [])
     .provider('$mixpanel', function () {
-        var apiKey, superProperties;
+        var apiKey, superProperties, _mixpanel;
 
         /**
          * Init the mixpanel global
          */
         function init() {
+            if (!Object.prototype.hasOwnProperty.call(window, 'mixpanel')) {
+                throw 'Global `mixpanel` not available. Did you forget to include the library on the page?';
+            }
+
             mixpanel.init(apiKey);
 
-            if (superProperties) mixpanel.register(superProperties);
+            waitTillAsyncApiLoaded(function () {
+                if (superProperties) _mixpanel.register(superProperties);
+            });
+        }
+
+        /**
+         * Wait till the async portion of the Mixpanel lib has loaded otherwise we'll end up passing back a reference
+         * to a bare JS array which won't actually track anything when called.
+         *
+         * @param callback to be called once the API has finished loading
+         */
+        function waitTillAsyncApiLoaded(callback) {
+            if (!Object.prototype.hasOwnProperty.call(window, 'mixpanel') || (window.mixpanel['__loaded'] === undefined)) {
+                setTimeout(function () { waitTillAsyncApiLoaded(callback); }, 500);
+            }
+
+            _mixpanel = window.mixpanel;
+            callback();
         }
 
         /**
@@ -57,6 +78,6 @@ angular.module('analytics.mixpanel', [])
 
         this.$get = function () {
             init();
-            return mixpanel;
+            return _mixpanel;
         };
     });
