@@ -1,6 +1,6 @@
 {
   "name": "angular-mixpanel",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "main": "./src/angular-mixpanel.js",
   "dependencies": {
     "angular": "1.2.x",

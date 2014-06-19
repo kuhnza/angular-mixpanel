@@ -20,7 +20,7 @@
  */
 angular.module('analytics.mixpanel', [])
     .provider('$mixpanel', function () {
-        var apiKey, superProperties, _mixpanel;
+        var apiKey, superProperties;
 
         /**
          * Init the mixpanel global
@@ -33,7 +33,7 @@ angular.module('analytics.mixpanel', [])
             mixpanel.init(apiKey);
 
             waitTillAsyncApiLoaded(function () {
-                if (superProperties) _mixpanel.register(superProperties);
+                if (superProperties) mixpanel.register(superProperties);
             });
         }
 
@@ -45,11 +45,33 @@ angular.module('analytics.mixpanel', [])
          */
         function waitTillAsyncApiLoaded(callback) {
             if (!Object.prototype.hasOwnProperty.call(window, 'mixpanel') || (window.mixpanel['__loaded'] === undefined)) {
-                setTimeout(function () { waitTillAsyncApiLoaded(callback); }, 500);
+                setTimeout(function () {
+                    waitTillAsyncApiLoaded(callback);
+                }, 500);
             }
 
-            _mixpanel = window.mixpanel;
             callback();
+        }
+
+        /**
+         * Perform a dynamic call to the specified mixpanel function against the window.mixpanel object.
+         *
+         * @param name the mixpanel function name. Can be dot separated to specify sub-property functions
+         * @returns {Function} a function that will lookup and dispatch a call to the window.mixpanel object
+         */
+        function callMixpanelFn(name) {
+            return function () {
+                var fn = window.mixpanel,
+                    parts = name.split('.'),
+                    scope, i;
+
+                for (i = 0; i < parts.length; i++) {
+                    scope = fn;
+                    fn = fn[parts[i]];
+                }
+
+                return fn.apply(scope, arguments);
+            }
         }
 
         /**
@@ -78,6 +100,34 @@ angular.module('analytics.mixpanel', [])
 
         this.$get = function () {
             init();
-            return _mixpanel;
+
+            // This is a bit of a gross hack but here we dynamically call the mixpanel functions against the
+            // window.mixpanel object as we can't be sure when the window reference will be updated.
+            return {
+                init: callMixpanelFn('init'),
+                push: callMixpanelFn('push'),
+                disable: callMixpanelFn('disable'),
+                track: callMixpanelFn('track'),
+                track_links: callMixpanelFn('track_links'),
+                track_forms: callMixpanelFn('track_forms'),
+                register: callMixpanelFn('register'),
+                register_once: callMixpanelFn('register_once'),
+                unregister: callMixpanelFn('unregister'),
+                identify: callMixpanelFn('identify'),
+                get_distinct_id: callMixpanelFn('get_distinct_id'),
+                alias: callMixpanelFn('alias'),
+                set_config: callMixpanelFn('set_config'),
+                get_config: callMixpanelFn('get_config'),
+                get_property: callMixpanelFn('get_property'),
+                people: {
+                    set: callMixpanelFn('people.set'),
+                    set_once: callMixpanelFn('people.set_once'),
+                    increment: callMixpanelFn('people.increment'),
+                    append: callMixpanelFn('people.append'),
+                    track_charge: callMixpanelFn('people.track_charge'),
+                    clear_charges: callMixpanelFn('people.clear_charges'),
+                    delete_user: callMixpanelFn('people.delete_user')
+                }
+            };
         };
     });
