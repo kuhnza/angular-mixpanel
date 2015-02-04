@@ -14,7 +14,7 @@ Then add the script to your page (be sure to include the mixpanel lib as well):
 
 ```html
 <script src="/bower_components/mixpanel/mixpanel.js"></script>
-<script src="/bower_components/angular-mixpanel/angular-mixpanel.js"></script>
+<script src="/bower_components/angular-mixpanel/src/angular-mixpanel.js"></script>
 ```
 
 Usage
@@ -31,7 +31,7 @@ Minimally you'll need to configure your API key like so:
 ```javascript
  angular.module('analytics.mixpanel')
         .config(['$mixpanelProvider', function($mixpanelProvider) {
-            $mixpanelProvider.apiKey('<your API key>');
+            $mixpanelProvider.apiKey('<your project token>'); // your token is different than your API key
         }]);
 ```
 
@@ -40,7 +40,7 @@ You can also supply [super properties](https://mixpanel.com/help/reference/javas
 ```javascript
  angular.module('analytics.mixpanel')
         .config(['$mixpanelProvider', function($mixpanelProvider) {
-            $mixpanelProvider.apiKey('<your API key>');
+            $mixpanelProvider.apiKey('<your project token>'); // your token is different than your API key
 
             $mixpanelProvider.superProperties({
                 someProp: true,
