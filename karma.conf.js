@@ -19,7 +19,7 @@ module.exports = function (config) {
 		files: [
 			'bower_components/angular/angular.js',
 			'bower_components/angular-mocks/angular-mocks.js',
-			'bower_components/mixpanel/mixpanel.js',
+			'bower_components/mixpanel/mixpanel-jslib-snippet.min.js',
 			'src/**/*.js',
 			'test/**/*.js'
 		],
