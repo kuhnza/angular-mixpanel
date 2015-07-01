@@ -13,7 +13,7 @@ module.exports = function (config) {
 		basePath: '',
 		frameworks: ['jasmine'],
 		logLevel: 'INFO',
-		browsers: ['PhantomJS'],
+		browsers: ['PhantomJS2'],
 		autoWatch: true,
 		reporters: ['progress', 'coverage'],
 		files: [
