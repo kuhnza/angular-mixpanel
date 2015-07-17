@@ -3,10 +3,10 @@
   "version": "1.1.0",
   "main": "./src/angular-mixpanel.js",
   "dependencies": {
-    "angular": "1.2.28",
-    "mixpanel": "2.3.6"
+    "angular": "1.4.1",
+    "mixpanel": "2.5.1"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.28"
+    "angular-mocks": "1.4.1"
   }
 }

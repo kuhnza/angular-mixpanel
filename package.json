@@ -5,18 +5,20 @@
     "type": "git",
     "url": "http://github.com/kuhnza/angular-mixpanel.git"
   },
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-uglify": "~0.4.0",
-    "grunt-karma": "~0.8.2",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-karma": "~0.11.2",
+    "jasmine-core": "~2.3.4",
     "karma": "~0.12.0",
-    "karma-coverage": "~0.2.0",
-    "karma-jasmine": "~0.2.1",
-    "karma-phantomjs-launcher": "~0.1.1",
-    "karma-chrome-launcher": "^0.1.7",
-    "load-grunt-tasks": "0.4.0"
+    "karma-chrome-launcher": "~0.2.0",
+    "karma-coverage": "~0.4.2",
+    "karma-jasmine": "~0.3.6",
+    "karma-phantomjs2-launcher": "~0.1.6",
+    "load-grunt-tasks": "~3.2.0"
   },
   "engines": {
     "node": ">=0.10.0"
